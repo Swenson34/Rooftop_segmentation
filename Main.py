@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from Models import Unet, FCN, FCN_deep
 from Performance_metric_IoU import IoU
 from Training import model_training
-from Data_augmentation import geometric_augmentation, y_axis_reflection
+from Data_augmentation import geometric_augmentation, x_axis_reflection
 
 # Size of inputs
 img_width = 512
@@ -74,15 +74,15 @@ Y_train_with_val_seg, Y_test_seg = train_test_split(Y_seg_full, test_size=0.1, r
 Y_train_seg, Y_val_seg = train_test_split(Y_train_with_val_seg, test_size=1/9, random_state=52, shuffle=True)
 
 # Augment the data set
-# If running the code on large GPU, replace y_axis_reflection with geometric_augmentation
+# If running the code on large GPU, replace x_axis_reflection with geometric_augmentation
 
 # Training data including validation set
-X_augmented = y_axis_reflection(X_train_with_val,  img_height, img_width, img_channels, np.uint8)
-Y_seg_augmented = y_axis_reflection(Y_train_with_val, img_height, img_width, 1, np.bool_)
+X_augmented = x_axis_reflection(X_train_with_val,  img_height, img_width, img_channels, np.uint8)
+Y_seg_augmented = x_axis_reflection(Y_train_with_val, img_height, img_width, 1, np.bool_)
 
 # Training data without validation set
-X_train_augmented = y_axis_reflection(X_train,  img_height, img_width, img_channels, np.uint8)
-Y_train_seg_augmented = y_axis_reflection(Y_train_seg, img_height, img_width, 1, np.bool_)
+X_train_augmented = x_axis_reflection(X_train,  img_height, img_width, img_channels, np.uint8)
+Y_train_seg_augmented = x_axis_reflection(Y_train_seg, img_height, img_width, 1, np.bool_)
 
 
 ## The code below has been commented out as it running all of it would be computational expensive.
