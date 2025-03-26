@@ -1,24 +1,18 @@
 # Import required packages
 import tensorflow as tf
-import keras
-from tensorflow.keras.utils import to_categorical
 import os
 import numpy as np
-import random
 from tqdm import tqdm
-from skimage.io import imread, imshow
 from skimage.transform import resize
-import matplotlib.pyplot as plt
-import collections
-import multiprocessing
 import h5py
 from sklearn.model_selection import train_test_split
 
 
 # Import made functions
-from Models import Unet, FCN, FCN_deep_model
+from Models import Unet, FCN, FCN_deep
 from Performance_metric_IoU import IoU
 from Training import model_training
+from Data_augmentation import geometric_augmentation, y_axis_reflection
 
 # Size of inputs
 img_width = 512
@@ -55,3 +49,76 @@ X_train_with_val, X_test, Y_train_with_val, Y_test = train_test_split(X_full, Y_
 
 X_train, X_val, Y_train, Y_val = train_test_split(X_train_with_val, Y_train_with_val, test_size=1/9, random_state=52, shuffle=True)
 
+# Create masks with excluded segments which are our target variable
+
+# Empty tensor
+Y_seg_full = np.zeros((len(mask_ids[2]), img_height, img_width,1), dtype = np.bool_)
+
+# Populate the tensor
+for n, id in tqdm(enumerate(train_ids[2]), total=len(train_ids[2])):
+    mask = imread(path_mask + "\\" + id.strip('.tif') + ".png")
+    mask_seg = imread(path_mask_seg + "\\" + id.strip('.tif') + ".png")
+
+    mask = (mask != 17)  # Label rooftop as True
+    mask_seg = (mask_seg != 8)  # Label superstructures as True
+
+    mask = tf.reshape(mask, [img_height, img_width, 1])
+    mask_seg = tf.reshape(mask_seg, [img_height, img_width, 1])
+
+    Y_seg_full[n] = ((mask == True) & (mask_seg == False))
+
+# Split the data into training, validation and test set
+# Having the same seed as in the first split should ensure the same indices are used
+
+Y_train_with_val_seg, Y_test_seg = train_test_split(Y_seg_full, test_size=0.1, random_state=52, shuffle=True)
+Y_train_seg, Y_val_seg = train_test_split(Y_train_with_val_seg, test_size=1/9, random_state=52, shuffle=True)
+
+# Augment the data set
+# If running the code on large GPU, replace y_axis_reflection with geometric_augmentation
+
+# Training data including validation set
+X_augmented = y_axis_reflection(X_train_with_val,  img_height, img_width, img_channels, np.uint8)
+Y_seg_augmented = y_axis_reflection(Y_train_with_val, img_height, img_width, 1, np.bool_)
+
+# Training data without validation set
+X_train_augmented = y_axis_reflection(X_train,  img_height, img_width, img_channels, np.uint8)
+Y_train_seg_augmented = y_axis_reflection(Y_train_seg, img_height, img_width, 1, np.bool_)
+
+
+## The code below has been commented out as it running all of it would be computational expensive.
+## Instead, uncomment the individual parts that you require and run the code.
+## Once models have been trained, their predictions can be visualised by running Performance_visualisation.py
+
+
+# If models have already been trained and saved weights are available skip the next step
+# Alternatively, uncomment the models you want to train
+
+# Unet_model = model_training(Unet(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs  = , batch_size_ = 8, epochs_ = 25)
+# FCN_model = model_training(FCN(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
+# FCN_deep_model = model_training(FCN_deep(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
+
+# Load models
+
+# Unet_model = keras.models.load_model("your_path")
+# FCN_model = keras.models.load_model("your_path")
+# FCN_deep_model = keras.models.load_model("your_path")
+
+
+# Define a threshold for segmentation
+# This will include some trial and error on validation data to find the optimal value
+
+# threshold = 0.5
+#
+# Unet_model_pred = Unet_model.predict(X_val, verbose=1)
+# Unet_model_pred = (Unet_model_pred > threshold).astype(np.uint8)
+#
+# FCN_model_preds = FCN_model.predict(X_val, verbose=1)
+# FCN_model_preds = (FCN_model_preds > threshold).astype(np.uint8)
+#
+# FCN_deep_model_preds = FCN_deep_model.predict(X_val, verbose=1)
+# FCN_deep_model_preds = (FCN_deep_model_preds > threshold).astype(np.uint8)
+
+# Evaluate the model
+
+# Model_performance = IoU( Target = , Prediction = )
+# print(Model_performance)
