@@ -1,7 +1,8 @@
 # Define model training function
+import tensorflow as tf
 
-def model_training(Model, X_train, Y_train, X_valid, Y_valid, path_to_save_model, path_to_logs, Batch_size, Epochs):
-    Model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+def model_training(model, x_train, y_train, x_valid, y_valid, path_to_save_model, path_to_logs, batch_size_, epochs_):
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
     # Define early stops
     callbacks = [tf.keras.callbacks.TensorBoard(log_dir=path_to_logs),
@@ -9,7 +10,7 @@ def model_training(Model, X_train, Y_train, X_valid, Y_valid, path_to_save_model
                  tf.keras.callbacks.ModelCheckpoint(path_to_save_model, verbose=1, save_best_only=True)]
 
     # Fit the model
-    Model.fit(X_train, Y_train, validation_data=(X_valid, Y_valid), batch_size=Batch_size, epochs=Epochs,
+    model.fit(x_train, y_train, validation_data=(x_valid, y_valid), batch_size = batch_size_, epochs = epochs_,
               callbacks=callbacks)
 
-    return Model
+    return model
