@@ -26,7 +26,7 @@ def geometric_augmentation(x, img_height, img_width, img_channels, data_type):
     return x_augmented
 
 
-def y_axis_reflection(x, img_height, img_width, img_channels, data_type):
+def x_axis_reflection(x, img_height, img_width, img_channels, data_type):
     x_augmented = np.zeros((len(x) * 2, img_height, img_width, img_channels), dtype = data_type)
 
     for n in range(len(x_augmented)):
