@@ -1,3 +1,5 @@
+import tensorflow as tf
+
 def Unet():
     inputs_Unet = tf.keras.layers.Input((img_width, img_height, img_channels))
 
@@ -136,7 +138,7 @@ def FCN():
     return model
 
 
-def FCN_deep_model():
+def FCN_deep():
     # Encoding layer
     inputs_SegNet = tf.keras.layers.Input((img_width, img_height, img_channels))
     x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', name='conv1', strides=(1, 1))(inputs_SegNet)
