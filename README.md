@@ -25,11 +25,11 @@ This report aimes at predicting the segmentation of rooftop on a city to estimat
 - Performance evaluation
   
      The IoU metric (Intersection over Union) is used to evaluate the performance of the segmentation model, reflecting how well it generalizes to unseen data.
-
 ---
 <a id="license"></a>
 ## License
 Data from : https://dataserv.ub.tum.de/index.php/s/m1655470. 
-
-     Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data,
 ---
+
+Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data,
+
