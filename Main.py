@@ -4,7 +4,6 @@ import os
 import numpy as np
 from tqdm import tqdm
 from skimage.transform import resize
-import h5py
 from sklearn.model_selection import train_test_split
 
 
@@ -93,9 +92,9 @@ Y_train_seg_augmented = x_axis_reflection(Y_train_seg, img_height, img_width, 1,
 # If models have already been trained and saved weights are available skip the next step
 # Alternatively, uncomment the models you want to train
 
-# Unet_model = model_training(Unet(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs  = , batch_size_ = 8, epochs_ = 25)
-# FCN_model = model_training(FCN(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
-# FCN_deep_model = model_training(FCN_deep(), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
+# Unet_model = model_training(Unet(img_width, img_height, img_channels), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs  = , batch_size_ = 8, epochs_ = 25)
+# FCN_model = model_training(FCN(img_width, img_height, img_channels), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
+# FCN_deep_model = model_training(FCN_deep(img_width, img_height, img_channels), x_train = , y_train = , x_valid = , y_valid = , path_to_save_model = , path_to_logs = , batch_size_ = 8, epochs_ = 25)
 
 # Load models
 

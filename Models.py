@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-def Unet():
+def Unet(img_width, img_height, img_channels):
     inputs_Unet = tf.keras.layers.Input((img_width, img_height, img_channels))
 
     # Scale the inputs between 0 and 1
@@ -70,7 +70,7 @@ def Unet():
     return model
 
 
-def FCN():
+def FCN(img_width, img_height, img_channels):
     inputs_FCN = tf.keras.layers.Input((img_width, img_height, img_channels))
 
     c1 = tf.keras.layers.Conv2D(16, (3, 3), kernel_initializer='he_normal', padding='same')(inputs_FCN)
@@ -138,138 +138,140 @@ def FCN():
     return model
 
 
-def FCN_deep():
+def FCN_deep(img_width, img_height, img_channels):
     # Encoding layer
-    inputs_SegNet = tf.keras.layers.Input((img_width, img_height, img_channels))
-    x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', name='conv1', strides=(1, 1))(inputs_SegNet)
-    x = tf.keras.layers.BatchNormalization(name='bn1')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', name='conv2')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn2')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    inputs_FCN = tf.keras.layers.Input((img_width, img_height, img_channels))
 
-    x = tf.keras.layers.Conv2D(64, (3, 3), padding='same', name='conv3')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn3')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(64, (3, 3), padding='same', name='conv4')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn4')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    c1 = tf.keras.layers.Conv2D(32, (3, 3), padding='same',strides= (1,1))(inputs_FCN)
+    c1 = tf.keras.layers.BatchNormalization()(c1)
+    c1 = tf.keras.layers.Activation('relu')(c1)
 
-    x = tf.keras.layers.Conv2D(128, (3, 3), padding='same', name='conv5')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn5')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(128, (3, 3), padding='same', name='conv6')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn6')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(128, (3, 3), padding='same', name='conv7')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn7')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    c2 = tf.keras.layers.Conv2D(32, (3, 3), padding='same')(c1)
+    c2 = tf.keras.layers.BatchNormalization()(c2)
+    c2 = tf.keras.layers.Activation('relu')(c2)
+    c2 = tf.keras.layers.MaxPooling2D()(c2)
+    c2 = tf.keras.layers.Dropout(0.25)(c2)
 
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv8')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn8')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv9')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn9')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv10')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn10')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    c3 = tf.keras.layers.Conv2D(64, (3, 3), padding='same')(c2)
+    c3 = tf.keras.layers.BatchNormalization()(c3)
+    c3 = tf.keras.layers.Activation('relu')(c3)
 
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv11')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn11')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv12')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn12')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name='conv13')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn13')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.MaxPooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    c4 = tf.keras.layers.Conv2D(64, (3, 3), padding='same')(c3)
+    c4 = tf.keras.layers.BatchNormalization()(c4)
+    c4 = tf.keras.layers.Activation('relu')(c4)
+    c4 = tf.keras.layers.MaxPooling2D()(c4)
+    c4 = tf.keras.layers.Dropout(0.25)(c4)
 
-    x = tf.keras.layers.Dense(1024, activation='relu', name='fc1')(x)
-    x = tf.keras.layers.Dense(1024, activation='relu', name='fc2')(x)
+    c5 = tf.keras.layers.Conv2D(128, (3, 3), padding='same')(c4)
+    c5 = tf.keras.layers.BatchNormalization(name='bn5')(c5)
+    c5 = tf.keras.layers.Activation('relu')(c5)
+
+    c6 = tf.keras.layers.Conv2D(128, (3, 3), padding='same')(c5)
+    c6 = tf.keras.layers.BatchNormalization()(c6)
+    c6 = tf.keras.layers.Activation('relu')(c6)
+
+    c7 = tf.keras.layers.Conv2D(128, (3, 3), padding='same')(c6)
+    c7 = tf.keras.layers.BatchNormalization()(c7)
+    c7 = tf.keras.layers.Activation('relu')(c7)
+    c7 = tf.keras.layers.MaxPooling2D()(c7)
+    c7 = tf.keras.layers.Dropout(0.25)(c7)
+
+    c8 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c7)
+    c8 = tf.keras.layers.BatchNormalization()(c8)
+    c8 = tf.keras.layers.Activation('relu')(c8)
+
+    c9 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c8)
+    c9 = tf.keras.layers.BatchNormalization()(c9)
+    c9 = tf.keras.layers.Activation('relu')(c9)
+
+    c10 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c9)
+    c10 = tf.keras.layers.BatchNormalization()(c10)
+    c10 = tf.keras.layers.Activation('relu')(c10)
+    c10 = tf.keras.layers.MaxPooling2D()(c10)
+    c10 = tf.keras.layers.Dropout(0.25)(c10)
+
+    c11 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c10)
+    c11 = tf.keras.layers.BatchNormalization()(c11)
+    c11 = tf.keras.layers.Activation('relu')(c11)
+
+    c12 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c11)
+    c12 = tf.keras.layers.BatchNormalization()(c12)
+    c12 = tf.keras.layers.Activation('relu')(c12)
+
+    c13 = tf.keras.layers.Conv2D(256, (3, 3), padding='same')(c12)
+    c13 = tf.keras.layers.BatchNormalization()(c13)
+    c13 = tf.keras.layers.Activation('relu')(c13)
+    c13 = tf.keras.layers.MaxPooling2D()(c13)
+    c13 = tf.keras.layers.Dropout(0.25)(c13)
+
+    d1 = tf.keras.layers.Dense(1024, activation = 'relu')(c13)
+    d2 = tf.keras.layers.Dense(1024, activation = 'relu')(d1)
 
     # Decoding Layer
 
-    x = tf.keras.layers.UpSampling2D()(x)
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv1')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn14')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv2')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn15')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv3')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn16')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.UpSampling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    t1 = tf.keras.layers.UpSampling2D()(d2)
+    t1 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t1)
+    t1 = tf.keras.layers.BatchNormalization()(t1)
+    t1 = tf.keras.layers.Activation('relu')(t1)
 
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv4')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn17')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv5')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn18')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same', name='deconv6')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn19')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    t2 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t1)
+    t2 = tf.keras.layers.BatchNormalization()(t2)
+    t2 = tf.keras.layers.Activation('relu')(t2)
 
-    x = tf.keras.layers.UpSampling2D()(x)
-    x = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same', name='deconv7')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn20')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same', name='deconv8')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn21')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same', name='deconv9')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn22')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    t3 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t2)
+    t3 = tf.keras.layers.BatchNormalization()(t3)
+    t3 = tf.keras.layers.Activation('relu')(t3)
+    t3 = tf.keras.layers.UpSampling2D()(t3)
+    t3 = tf.keras.layers.Dropout(0.25)(t3)
 
-    x = tf.keras.layers.UpSampling2D()(x)
-    x = tf.keras.layers.Conv2DTranspose(64, (3, 3), padding='same', name='deconv10')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn23')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(64, (3, 3), padding='same', name='deconv11')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn24')(x)
-    x = tf.keras.layers.Activation('relu')(x)
+    t4 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t3)
+    t4 = tf.keras.layers.BatchNormalization()(t4)
+    t4 = tf.keras.layers.Activation('relu')(t4)
 
-    x = tf.keras.layers.UpSampling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
+    t5 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t4)
+    t5 = tf.keras.layers.BatchNormalization()(t5)
+    t5 = tf.keras.layers.Activation('relu')(t5)
 
-    x = tf.keras.layers.Conv2DTranspose(32, (3, 3), padding='same', name='deconv12')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn25')(x)
-    x = tf.keras.layers.Activation('relu')(x)
-    x = tf.keras.layers.Dropout(0.2)(x)
-    x = tf.keras.layers.Conv2DTranspose(1, (3, 3), padding='same', name='deconv13')(x)
-    x = tf.keras.layers.BatchNormalization(name='bn26')(x)
-    pred = tf.keras.layers.Activation('sigmoid')(x)
+    t6 = tf.keras.layers.Conv2DTranspose(256, (3, 3), padding='same')(t5)
+    t6 = tf.keras.layers.BatchNormalization()(t6)
+    t6 = tf.keras.layers.Activation('relu')(t6)
+    t6 = tf.keras.layers.Dropout(0.25)(t6)
 
-    model = tf.keras.Model(inputs=inputs_SegNet, outputs=pred)
+    t7 = tf.keras.layers.UpSampling2D()(t6)
+    t7 = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same')(t7)
+    t7 = tf.keras.layers.BatchNormalization()(t7)
+    t7 = tf.keras.layers.Activation('relu')(t7)
+
+    t8 = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same')(t7)
+    t8 = tf.keras.layers.BatchNormalization()(t8)
+    t8 = tf.keras.layers.Activation('relu')(t8)
+
+    t9 = tf.keras.layers.Conv2DTranspose(128, (3, 3), padding='same')(t8)
+    t9 = tf.keras.layers.BatchNormalization()(t9)
+    t9 = tf.keras.layers.Activation('relu')(t9)
+    t9 = tf.keras.layers.Dropout(0.25)(t9)
+
+
+    t10 = tf.keras.layers.UpSampling2D()(t9)
+    t10 = tf.keras.layers.Conv2DTranspose(64, (3, 3), padding='same')(t10)
+    t10 = tf.keras.layers.BatchNormalization()(t10)
+    t10 = tf.keras.layers.Activation('relu')(t10)
+
+    t11 = tf.keras.layers.Conv2DTranspose(64, (3, 3), padding='same')(t10)
+    t11 = tf.keras.layers.BatchNormalization()(t11)
+    t11 = tf.keras.layers.Activation('relu')(t11)
+
+
+    t12 = tf.keras.layers.UpSampling2D()(t11)
+    t12 = tf.keras.layers.Conv2DTranspose(32, (3, 3), padding='same')(t12)
+    t12 = tf.keras.layers.BatchNormalization()(t12)
+    t12 = tf.keras.layers.Activation('relu')(t12)
+    t12 = tf.keras.layers.Dropout(0.3)(t12)
+
+    t13 = tf.keras.layers.Conv2DTranspose(1, (3, 3), padding='same')(t12)
+    t13 = tf.keras.layers.BatchNormalization()(t13)
+    pred = tf.keras.layers.Activation('sigmoid')(t13)
+
+    model = tf.keras.Model(inputs=inputs_FCN, outputs=pred)
 
     return model
