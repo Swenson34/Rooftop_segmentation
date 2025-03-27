@@ -8,5 +8,4 @@
 <img src="https://discuss.pytorch.org/uploads/default/32008b38be5d436b1c0193c8aaa655d13d5ecda7" 
      alt="FCN" 
      width="600" />
-# SegNet Structure
-![SegNet](r"C:\Users\15489\Desktop\Github images\segnet_Vorazx7.png")
+
