@@ -31,5 +31,5 @@ This report aimes at predicting the segmentation of rooftop on a city to estimat
 ## License
 Data from : https://dataserv.ub.tum.de/index.php/s/m1655470. 
 
-Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data,
+     Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data,
 ---
