@@ -16,7 +16,7 @@ This report aimes at predicting the segmentation of rooftop on a city to estimat
 
 - Data Augmentation
 
-     The images would be rotated from 90 degrees to 180, 270 degrees individually. And the images can also be flipped around x-axis.
+     The images would be rotated from 90 degrees to 180, 270 degrees individually shown in geometric_augmentatiom. And the images can also be flipped around x-axis shown in the function of x_axis_reflection . If you have a large GPU you can try geometric_augmentatiom.
   
 - Model trainning
 
@@ -28,8 +28,18 @@ This report aimes at predicting the segmentation of rooftop on a city to estimat
 ---
 <a id="license"></a>
 ## License
-Data from : https://dataserv.ub.tum.de/index.php/s/m1655470. 
+data:https://dataserv.ub.tum.de/index.php/s/m1655470. 
 ---
 
 Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data.
+---
 
+Requirements: 
+cuda == 11.2
+TensorFlow == 2.10
+
+Libraries:(Below are some of the main libraries that are used)
+- os
+- tensorflow
+- matplotlib
+- tensorflow.keras 
