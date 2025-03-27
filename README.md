@@ -9,4 +9,4 @@
      alt="FCN" 
      width="600" />
 # SegNet Structure
-![SegNet]("C:\Users\15489\Desktop\Github images\segnet_Vorazx7.png")
+![SegNet](r"C:\Users\15489\Desktop\Github images\segnet_Vorazx7.png")
