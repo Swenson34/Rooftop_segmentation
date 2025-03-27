@@ -34,11 +34,12 @@ data:https://dataserv.ub.tum.de/index.php/s/m1655470.
 Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data.
 ---
 
-Requirements: 
+## Requirements: 
 cuda == 11.2
 TensorFlow == 2.10
+---
 
-Libraries:(Below are some of the main libraries that are used)
+## Libraries:(Below are some of the main libraries that are used)
 - os
 - tensorflow
 - matplotlib
