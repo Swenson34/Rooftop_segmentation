@@ -46,4 +46,3 @@ TensorFlow == 2.10
 - os
 - tensorflow
 - matplotlib
-- tensorflow.keras 
