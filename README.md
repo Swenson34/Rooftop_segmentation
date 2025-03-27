@@ -10,6 +10,7 @@
      alt="FCN" 
      width="600" />
 ---
+# FCN deep model 
 
 This report aimes at predicting the segmentation of rooftop on a city to estimate the solar potential by using different models structures shown as above. The main idea to achieve the goal can be divided into three parts in general.
 
@@ -19,10 +20,16 @@ This report aimes at predicting the segmentation of rooftop on a city to estimat
   
 - Model trainning
 
-     The data would be splited into training set, validation set and testing set. Data-preprocessing would be needed, for instance, one of the most important ways is binarization where we set a threshold= 0.5, because the outputs of those model predicted were in the type of [0.] (float 32). All of these models (U-Net, FCN, and FCN_deep) are deep learning architectures implemented in TensorFlow. 
-- Performance evaluation
-     The metric IOU would be used to evaluate the model representing the model gerneralization ability.
+     The data are split into training, validation, and testing sets. Data preprocessing is required; for example, one important step is binarization by setting a threshold of 0.5, because the model outputs are floating-point predictions in the range [0, 1]. All of these models (U-Net, FCN, and FCN_deep) are deep learning architectures implemented in TensorFlow.
    
-Download the dataset: 
-Data location: https://dataserv.ub.tum.de/index.php/s/m1655470
-Create a local folder on your desktop and clearly lable locations of you images (training data) their labels (masks) and testing data
+- Performance evaluation
+  
+     The IoU metric (Intersection over Union) is used to evaluate the performance of the segmentation model, reflecting how well it generalizes to unseen data.
+
+---
+<a id="license"></a>
+## License
+Data from : https://dataserv.ub.tum.de/index.php/s/m1655470. 
+
+Create a local folder on your desktop or pc and clearly lable locations of you images (training data) their labels (masks) and testing data,
+---
