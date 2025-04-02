@@ -1,5 +1,6 @@
 # *Rooftop 3D Segmentation and Solar Potential Estimation* 
-## 👋 Introduction
+# Introduction
+This repository contains the work for EE981 Image and Video Processing module. The tile of our project is "Rooftop 3D Segmentation and Solar Potential Estimation".  
 # Unet Structure
 <img src="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png" 
      alt="Unet" 
