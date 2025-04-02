@@ -37,7 +37,8 @@ The predictions of the models are used to calculate the area of rooftops without
 ---
 # Model performance visualised
 In the following we show an example of each of the built models predictions out-of-sample on test data. The top image is the function input; bottom left is the ground truth; and bottom right is the models' prediction.
-# U-net without augmentation out of sample:
+
+## U-net without augmentation out of sample:
 ![Image](https://github.com/user-attachments/assets/48fbdcca-b6f9-4e97-bf07-ba39ee3c5351)
 
 ## U-net with augmentation out of sample:
@@ -59,6 +60,8 @@ In the following we show an example of each of the built models predictions out-
 ![Image](https://github.com/user-attachments/assets/7f25182b-f7d5-4653-9da3-2943f8fa2ef8)
 
 
+Runs 1 and 3 were done without test data, and were used to find the optimal threshold value which was used in runs 2 and 4. We are mainly interested in results of runs 2 and 4 as these indicate how robust our models our considering that no threshold optimisation is conducted in these runs.
+
     Run	U-Net	FCN    FCN Revised
      1	0.8695	0.8673	0.8274
      2	0.8658	0.8670	0.8228
@@ -66,6 +69,8 @@ In the following we show an example of each of the built models predictions out-
      4	0.8646	0.8649	0.8668
 
 ---
+# How to implement the study
+
 <a id="license"></a>
 ## License
 data:https://dataserv.ub.tum.de/index.php/s/m1655470. 
