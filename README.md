@@ -36,6 +36,7 @@ The predictions of the models are used to calculate the area of rooftops without
      width="600" />
 ---
 # Model performance
+In the following we show an example of each of the built models' predictions out-of-sample on test data. The top image is the function input; bottom left is the ground truth; and top right is the model prediction.
 # U-net without augmentation out of sample:
 ![Image](https://github.com/user-attachments/assets/48fbdcca-b6f9-4e97-bf07-ba39ee3c5351)
 
