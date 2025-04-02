@@ -3,15 +3,21 @@
 This repository contains the entirety of our work for EE981 Image and Video Processing module project. The tile of our project was "Rooftop 3D Segmentation and Solar Potential Estimation" and its objectives were the following: 
 
      1. Identify the benefits and disadvantages of using solar panels to the environment.  
+     
      2. Conduct a comparison of the two approaches: LiDAR and CV for evaluation of the PV potential.  
+     
      3. Carry out a literature review of CV-based approaches for rooftop segmentation and evaluation of PV potential.  
+     
      4. Analyse the pipeline and identify the limitations of the study, “RID—Roof Information Dataset for Computer Vision-Based Photovoltaic Potential Assessment.”  
+     
      5. Map any literature findings that could improve the process of said study and mitigate some of the limitations.  
+     
      6. Implement different Neural Network architectures to perform analysis of rooftop data and evaluate the accuracy of each, using the study’s existing dataset.    
+     
      7. Estimate PV potential using the results from each neural network.  
 
 # Methodology
-The first set of our methodology is data preparation. We used data set from: “RID—Roof Information Dataset for Computer Vision-Based Photovoltaic Potential Assessment” which contains 1880 aerial images of centred buildings from a village of Wartenberg, Germany. Along with aerial images of buildings, the paper provides two annotated mask data sets. The first one contains labels of the rooftop area (without excluding segments), while the second one contains labels of the rooftop segments. Using these two masks, the third mask was created. It contains only the rooftop area without any superstructures and is the dependent variable of the study.
+The first step of our methodology is data preparation. We used data set from: “RID—Roof Information Dataset for Computer Vision-Based Photovoltaic Potential Assessment” which contains 1880 aerial images of centred buildings from a village of Wartenberg, Germany. Along with aerial images of buildings, the paper provides two annotated mask data sets. The first one contains labels of the rooftop area (without excluding segments), while the second one contains labels of the rooftop segments. Using these two masks, the third mask was created. It contains only the rooftop area without any superstructures and is the dependent variable of the study.
 
 To predict the dependent variable (rooftop area without any superstructures), three Neural Network models were defined. These are: U-net with around 2 million parameters, Fully Convolutional Network (FCN) with also around 2 million parameters and FCN revised (deep) model with around 11 million parameters. The defined models can be viewed and edioted in the Models.py file.
 
