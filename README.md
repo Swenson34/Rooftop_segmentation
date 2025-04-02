@@ -1,6 +1,24 @@
 # *Rooftop 3D Segmentation and Solar Potential Estimation* 
 # Introduction
-This repository contains the work for EE981 Image and Video Processing module. The tile of our project is "Rooftop 3D Segmentation and Solar Potential Estimation".  
+This repository contains the entirety of our work for EE981 Image and Video Processing module project. The tile of our project was "Rooftop 3D Segmentation and Solar Potential Estimation" and its objectives were the following: 
+
+     1. Identify the benefits and disadvantages of using solar panels to the environment.  
+     2. Conduct a comparison of the two approaches: LiDAR and CV for evaluation of the PV potential.  
+     3. Carry out a literature review of CV-based approaches for rooftop segmentation and evaluation of PV potential.  
+     4. Analyse the pipeline and identify the limitations of the study, “RID—Roof Information Dataset for Computer Vision-Based Photovoltaic Potential Assessment.”  
+     5. Map any literature findings that could improve the process of said study and mitigate some of the limitations.  
+     6. Implement different Neural Network architectures to perform analysis of rooftop data and evaluate the accuracy of each, using the study’s existing dataset.    
+     7. Estimate PV potential using the results from each neural network.  
+
+# Methodology
+The first set of our methodology is data preparation. We used data set from: “RID—Roof Information Dataset for Computer Vision-Based Photovoltaic Potential Assessment” which contains 1880 aerial images of centred buildings from a village of Wartenberg, Germany. Along with aerial images of buildings, the paper provides two annotated mask data sets. The first one contains labels of the rooftop area (without excluding segments), while the second one contains labels of the rooftop segments. Using these two masks, the third mask was created. It contains only the rooftop area without any superstructures and is the dependent variable of the study.
+
+To predict the dependent variable (rooftop area without any superstructures), three Neural Network models were defined. These are: U-net with around 2 million parameters, Fully Convolutional Network (FCN) with also around 2 million parameters and FCN revised (deep) model with around 11 million parameters. The defined models can be viewed and edioted in the Models.py file.
+
+Once the models were trained, we evaluated them on validation data using using Intersection over Union (IoU) metric, which can be viewed in Performance_metric_IoU.py file.
+
+The predictions of the models are used to calculate the area of rooftops without any superstructures. This is done by counting the number of pixels in predicted output and multiplying them by the area each pixels captures. For our images, this was 0.01 metere squared.
+
 # Unet Structure
 <img src="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png" 
      alt="Unet" 
@@ -12,20 +30,6 @@ This repository contains the work for EE981 Image and Video Processing module. T
      width="600" />
 ---
 
-This report aimes at predicting the segmentation of rooftop on a city to estimate the solar potential by using different models structures shown as above. The main idea to achieve the goal can be divided into three parts in general.
-
-- Data Augmentation
-
-     The images would be rotated from 90 degrees to 180, 270 degrees individually shown in geometric_augmentatiom. And the images can also be flipped around x-axis shown in the function of x_axis_reflection . If you have a large GPU you can try geometric_augmentatiom.
-  
-- Model trainning
-
-     The data are split into training, validation, and testing sets. Data preprocessing is required; for example, one important step is binarization by setting a threshold of 0.5, because the model outputs are floating-point predictions in the range [0, 1]. All of these models (U-Net, FCN, and FCN_deep) are deep learning architectures implemented in TensorFlow.
-   
-- Performance evaluation
-  
-     The IoU metric (Intersection over Union) is used to evaluate the performance of the segmentation model, reflecting how well it generalizes to unseen data.
-  
 ---
 <a id="license"></a>
 ## License
