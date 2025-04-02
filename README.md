@@ -35,6 +35,9 @@ The predictions of the models are used to calculate the area of rooftops without
      alt="FCN" 
      width="600" />
 ---
+# Model performance
+U-net without augmentation:
+![Image](https://github.com/user-attachments/assets/507201fe-0c3a-4b64-b91f-d4683df1fbdd)
 
 ---
 <a id="license"></a>
