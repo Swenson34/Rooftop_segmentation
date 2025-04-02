@@ -35,8 +35,8 @@ The predictions of the models are used to calculate the area of rooftops without
      alt="FCN" 
      width="600" />
 ---
-# Model performance
-In the following we show an example of each of the built models' predictions out-of-sample on test data. The top image is the function input; bottom left is the ground truth; and top right is the model prediction.
+# Model performance visualised
+In the following we show an example of each of the built models predictions out-of-sample on test data. The top image is the function input; bottom left is the ground truth; and bottom right is the models' prediction.
 # U-net without augmentation out of sample:
 ![Image](https://github.com/user-attachments/assets/48fbdcca-b6f9-4e97-bf07-ba39ee3c5351)
 
@@ -54,6 +54,17 @@ In the following we show an example of each of the built models' predictions out
 
 # FCN revised with augmentation out of sample:
 ![Image](https://github.com/user-attachments/assets/70c5f71c-6998-4638-a0b5-a052cf3f2052)
+---
+# Model performance IoU
+![Image](https://github.com/user-attachments/assets/7f25182b-f7d5-4653-9da3-2943f8fa2ef8)
+
+
+    Run	U-Net	FCN       FCN Revised
+     1	0.8695	0.8673	0.8274
+     2	0.8658	0.8670	0.8228
+     3	0.8757	0.8786	0.8516
+     4	0.8646	0.8649	0.8668
+
 ---
 <a id="license"></a>
 ## License
