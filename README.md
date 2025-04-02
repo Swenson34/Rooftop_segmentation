@@ -37,8 +37,22 @@ The predictions of the models are used to calculate the area of rooftops without
 ---
 # Model performance
 # U-net without augmentation out of sample:
-![Image](https://github.com/user-attachments/assets/507201fe-0c3a-4b64-b91f-d4683df1fbdd)
+![Image](https://github.com/user-attachments/assets/48fbdcca-b6f9-4e97-bf07-ba39ee3c5351)
 
+# U-net with augmentation out of sample:
+![Image](https://github.com/user-attachments/assets/64c34a64-a004-4acf-87f0-a93a137d1ecf)
+
+# FCN without augmentation out of sample:
+![Image](https://github.com/user-attachments/assets/2dfa7b8d-b4eb-483d-9666-44cdef31c6fc)
+
+# FCN with augmentation out of sample:
+![Image](https://github.com/user-attachments/assets/b26f2f0d-a122-4cb5-af20-c80d5e710706)
+
+# FCN revised without augmentation out of sample:
+![Image](https://github.com/user-attachments/assets/a19ea7a1-695e-4e59-a28b-43baf4625469)
+
+# FCN revised with augmentation out of sample:
+![Image](https://github.com/user-attachments/assets/70c5f71c-6998-4638-a0b5-a052cf3f2052)
 ---
 <a id="license"></a>
 ## License
