@@ -59,7 +59,7 @@ In the following we show an example of each of the built models predictions out-
 ![Image](https://github.com/user-attachments/assets/7f25182b-f7d5-4653-9da3-2943f8fa2ef8)
 
 
-    Run	U-Net	FCN       FCN Revised
+    Run	U-Net	FCN    FCN Revised
      1	0.8695	0.8673	0.8274
      2	0.8658	0.8670	0.8228
      3	0.8757	0.8786	0.8516
